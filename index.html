@@ -26,7 +26,6 @@
 	<script>
   $(function () {//wait for document to fully load before running javascript
     var socket = io();
-	var username = "Anon";
     $('#sendBut').on('click',function(e){
       e.preventDefault(); // prevents page reloading
       socket.emit('chat message', $('#m').val());
@@ -35,12 +34,12 @@
     });
 	$('#changeName').on('click',function(namechange){
 	  namechange.preventDefault();
-	  username = ($('#m').val());
+	  socket.emit('namechange', $('#m').val());
 	  $('#m').val('');
 	  return false;
 	});
     socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(username + ": " + msg));
+      $('#messages').append($('<li>').text(msg));
     });
   });
 </script>
