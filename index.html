@@ -9,7 +9,7 @@
 	  form button { width: 9%; background: rgb(130, 224, 255); border: solid; padding: 10px; }
       form input { border: 0; padding: 10px; width: 80%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: solid; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin: 0; padding: 0; padding-bottom: 4%}
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }	
     </style>
@@ -40,6 +40,7 @@
 	});
     socket.on('chat message', function(msg){
       $('#messages').append($('<li>').text(msg));
+      window.scrollTo(0,document.body.scrollHeight);
     });
   });
 </script>
