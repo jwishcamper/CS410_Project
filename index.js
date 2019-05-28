@@ -46,10 +46,10 @@ io.on('connection', function(socket){
 	  sqlcon.query("select username from userDB.userStorage where username = \""+loginid+"\" and userpass = \""+pass+"\";", function (err, result, fields) {
 		  if(err) console.log(err);
 		  if(result[0] != null) {
-		  io.emit('loginsuccess');
+		  io.to(socket.id).emit('loginsuccess');
 		    username[clients.indexOf(socket)] = result[0].username; }
 		  else{
-			  io.emit('loginfailure');
+			  io.to(socket.id).emit('loginfailure');
 		  }
 		  });		 
 	  });
