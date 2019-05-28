@@ -57,18 +57,18 @@ io.on('connection', function(socket){
   socket.on('submit', function(loginid,pass,email){
 	    //take user input to create an account in database
 	  if(loginid=="" || pass ==""){//if there's nothing in user or pass fields, stop here
-		  io.emit('createfailure');
+		  io.to(socket.id).emit('createfailure');
 	  }
 	  else{
 		  sqlcon.query("select username from userDB.userStorage where username = \""+loginid+"\";", function (err, result, fields) {
 		  if(err) console.log(err);
 		  if(result[0] != null) {
-			  io.emit('createtaken'); //if this query has something, the username is taken
+			  io.to(socket.id).emit('createtaken'); //if this query has something, the username is taken
 		  }
 		  else{ //if not, go ahead and insert into database
 			  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",\""+email+"\",curdate(),0,null);", function (err, result, fields) {
 				  if(err) {console.log(err);  }
-				  else{ io.emit('createsuccess'); }
+				  else{ io.to(socket.id).emit('createsuccess'); }
 				  });	
 		  }
 		  });
