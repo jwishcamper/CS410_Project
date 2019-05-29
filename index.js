@@ -25,6 +25,7 @@ var sql = require('mysql');
 var clients = [];
 var username = [];
 
+
 //sql connection
 var sqlcon = sql.createConnection({
 	  host: "localhost",
@@ -37,9 +38,9 @@ sqlcon.connect(function(err) {
 	if(err) console.log(err);
 	else console.log("Database connected.");
 });
-//load public directory
-app.use(express.static("public"));
 
+//load public directory
+app.use(express.static('public'));
 
 //do this when user connects
 io.on('connection', function(socket){

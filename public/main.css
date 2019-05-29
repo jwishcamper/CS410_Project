@@ -19,7 +19,7 @@ form {
 
 form input {
   position: fixed;
-  border: 0;
+  border: solid;
   padding: 10px;
   width: 58%;
   margin-right: .5%;
