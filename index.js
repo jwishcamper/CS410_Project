@@ -12,7 +12,8 @@
 
 
 //require vars
-var app = require('express')();
+const express = require("express");
+const app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var sql = require('mysql');
@@ -36,11 +37,9 @@ sqlcon.connect(function(err) {
 	if(err) console.log(err);
 	else console.log("Database connected.");
 });
+//load public directory
+app.use(express.static("public"));
 
-//load html file
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
 
 //do this when user connects
 io.on('connection', function(socket){
