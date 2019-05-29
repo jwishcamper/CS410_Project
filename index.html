@@ -1,35 +1,10 @@
 <!doctype html>
-<html>
+<html lang = "en">
   <head>
     <title>Mercury</title>
-    <style>
-      .Disabled{ pointer-events: none; cursor: not-allowed; opacity: 0; filter: alpha(opacity=65); -webkit-box-shadow: none;  box-shadow: none; }
-      .Enabled{ pointer-events: auto; cursor: auto; opacity: default; filter: default; -webkit-box-shadow: default;  box-shadow: default; }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: solid; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; padding-bottom: 4%}
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }	
-      #overlay { position: fixed; display: block;  width: 60%; height: 60%; top: 20%; left: 20%; right: 20%; bottom: 20%; background-color: rgba(0,0,0,0.5); z-index: 2; }
-      #createoverlay { position: fixed; display: none;  width: 60%; height: 60%; top: 20%; left: 20%; right: 20%; bottom: 20%; background-color: rgba(0,0,0,0.5); z-index: 2; }
-      #login {position: fixed; width: 10%; height: 5%; top :60%;left: 35%}
-      #create {position: fixed; width: 10%; height: 5%; top :60%;left: 55%}
-      #usernameBox {position: fixed; width: 30%; height: 5%; top: 40%; left: 35%}
-      #passwordBox {position: fixed; width: 30%; height: 5%; top: 50%; left: 35%}
-      #username {position: fixed; width: 10%; height: 5%; top: 41%; left: 29%}
-      #password {position: fixed; width: 10%; height: 5%; top: 51%; left: 29%}
-      
-      #submit {position: fixed; width: 10%; height: 5%; top :60%;left: 35%}
-      #back {position: fixed; width: 10%; height: 5%; top :60%;left: 55%}
-      #usernameBoxCreate {position: fixed; width: 30%; height: 5%; top: 40%; left: 35%}
-      #passwordBoxCreate {position: fixed; width: 30%; height: 5%; top: 45%; left: 35%}
-      #emailBoxCreate {position: fixed; width: 30%; height: 5%; top: 50%; left: 35%}
-      #email {position: fixed; width: 10%; height: 5%; top: 51%; left: 29%}
-      #passwordCreate {position: fixed; width: 10%; height: 5%; top: 46%; left: 29%}
-    </style>
+    <link rel="stylesheet" href="main.css"/>
+
+
   </head>
   <body>
   <div id="createoverlay">
@@ -60,7 +35,7 @@
 	<script>
   $(function () {//wait for document to fully load before running javascript
     var socket = io();
-  
+
   //do this when login button clicked
     $('#login').on('click',function(login){
         login.preventDefault(); // prevents page reloading
@@ -69,28 +44,28 @@
         $('#passwordBox').val('');
         return false;
       });
-  
+
   //do this when create account button clicked
     $('#create').on('click',function(create){ //bring up create account page
         create.preventDefault(); // prevents page reloading
         $('#overlay').toggle(300, function() {$('#createoverlay').toggle(300); });
         return false;
       });
-  
+
   //do this when back button clicked
     $('#back').on('click',function(back){ //close create account page
         back.preventDefault(); // prevents page reloading
         $('#createoverlay').toggle(300, function() {$('#overlay').toggle(300); });
         return false;
       });
-  
+
   //do this when submit button clicked
     $('#submit').on('click',function(submit){ //submit account creation
         submit.preventDefault(); // prevents page reloading
         socket.emit('submit',$('#usernameBoxCreate').val(), $('#passwordBoxCreate').val(),$('#emailBoxCreate').val());
         return false;
       });
-  
+
     //do this when send message button clicked
     $('#sendBut').on('click',function(e){ //send message
       e.preventDefault(); // prevents page reloading
@@ -98,14 +73,14 @@
       $('#m').val('');
       return false;
     });
-    
+
     //if you press enter after typing password, will attempt login
     $("#passwordBox").keyup(function(event) {
         if (event.keyCode === 13) {
             $("#login").click();
         }
     });
-    
+
   //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly used by client.
     socket.on('chat message', function(msg){ //receive message
       $('#messages').append($('<li>').text(msg));
