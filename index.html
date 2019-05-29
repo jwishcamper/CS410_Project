@@ -2,46 +2,8 @@
 <html lang = "en">
   <head>
     <title>Mercury</title>
-    <style>
+    <link rel="stylesheet" href="main.css">
 
-      .Disabled{ pointer-events: none; cursor: not-allowed; opacity: 0; filter: alpha(opacity=65); -webkit-box-shadow: none;  box-shadow: none; }
-      .Enabled{ pointer-events: auto; cursor: auto; opacity: default; filter: default; -webkit-box-shadow: default;  box-shadow: default; }
-
-
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 67%; left:33%;}
-      form input {position:fixed; border: 0; padding: 10px; width: 58%; margin-right: .5%; }
-      form button { float:right;width: 12.5%; background: rgb(130, 224, 255); right:0;border: solid; padding: 10px; }
-
-
-      #messages { position:fixed;list-style-type: none; margin: 0; padding: 0; left:33%; width:66%; padding-bottom: 4%}
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-
-
-      #overlay { position: fixed; display: block;  width: 60%; height: 60%; top: 20%; left: 20%; right: 20%; bottom: 20%; background-color: rgba(0,0,0,0.5); z-index: 2; }
-      #createoverlay { position: fixed; display: none;  width: 60%; height: 60%; top: 20%; left: 20%; right: 20%; bottom: 20%; background-color: rgba(0,0,0,0.5); z-index: 2; }
-
-
-      #login {position: fixed; width: 10%; height: 5%; top :60%;left: 35%}
-      #create {position: fixed; width: 10%; height: 5%; top :60%;left: 55%}
-      #usernameBox {position: fixed; width: 30%; height: 5%; top: 40%; left: 35%}
-      #passwordBox {position: fixed; width: 30%; height: 5%; top: 50%; left: 35%}
-      #username {position: fixed; width: 10%; height: 5%; top: 41%; left: 29%}
-      #password {position: fixed; width: 10%; height: 5%; top: 51%; left: 29%}
-
-
-      #submit {position: fixed; width: 10%; height: 5%; top :60%;left: 35%}
-      #back {position: fixed; width: 10%; height: 5%; top :60%;left: 55%}
-      #usernameBoxCreate {position: fixed; width: 30%; height: 5%; top: 40%; left: 35%}
-      #passwordBoxCreate {position: fixed; width: 30%; height: 5%; top: 45%; left: 35%}
-      #emailBoxCreate {position: fixed; width: 30%; height: 5%; top: 50%; left: 35%}
-      #email {position: fixed; width: 10%; height: 5%; top: 51%; left: 29%}
-      #passwordCreate {position: fixed; width: 10%; height: 5%; top: 46%; left: 29%}
-
-      #friends { position: fixed; display: block;  width: 33%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 2; }
-    </style>
   </head>
   <body>
   <div id="friends" >
