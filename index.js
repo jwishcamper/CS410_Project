@@ -20,6 +20,7 @@ var sql = require('mysql');
 //clients and username array are used to store usernames without having to query database every time.
 //when a user connects, it stores their socket ID in clients and their username in username[] at the same index
 //when a user sends a message, it pulls their username from username[clients.indexOf(socket)]
+//for private messages, can search for index of a specific username and get socket.id of that username from clients[]
 var clients = [];
 var username = [];
 
@@ -51,6 +52,7 @@ io.on('connection', function(socket){
   });
   
   //do this when user sends a message
+  //when implementing private chats, io.emit will change to io.to(socket.id [of appropriate socket] ).emit
   socket.on('chat message', function(msg){
     io.emit('chat message',username[clients.indexOf(socket)]+": "+ msg);
   });
