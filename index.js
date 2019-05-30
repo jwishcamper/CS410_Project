@@ -44,17 +44,15 @@ app.use(express.static('public'));
 
 //do this when user connects
 io.on('connection', function(socket){
-  console.log('a user connected');
-  clients.push(socket.id); 
-  username[clients.indexOf(socket)] = "Anonymous";
+  console.log('a user connected: '+socket.id);
   socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
+    console.log(socket.id + ' message: ' + msg);
   });
   
   //do this when user sends a message
   //when implementing private chats, io.emit will change to io.to(socket.id [of appropriate socket] ).emit
   socket.on('chat message', function(msg){
-    io.emit('chat message',username[clients.indexOf(socket)]+": "+ msg);
+    io.emit('chat message',username[clients.indexOf(socket.id)]+": "+ msg);
   });
   
 //do this when user attempts to login
@@ -63,8 +61,9 @@ socket.on('loginid', function(loginid,pass){
 	  sqlcon.query("select username from userDB.userStorage where username = \""+loginid+"\" and userpass = \""+pass+"\";", function (err, result, fields) {
 		  if(err) console.log(err);
 		  if(result[0] != null) {
-		  io.to(socket.id).emit('loginsuccess');
-		    username[clients.indexOf(socket)] = result[0].username; }
+			  io.to(socket.id).emit('loginsuccess');
+			  clients.push(socket.id); 
+			  username[clients.indexOf(socket.id)] = result[0].username; }
 		  else{
 			  io.to(socket.id).emit('loginfailure');
 		  }
@@ -95,8 +94,8 @@ socket.on('loginid', function(loginid,pass){
 
 //do this when user disconnects
   socket.on('disconnect', function(){
-	clients.splice(clients.indexOf(socket), 1);
-	username.splice(clients.indexOf(socket), 1);
+	clients.splice(clients.indexOf(socket.id), 1);
+	username.splice(clients.indexOf(socket.id), 1);
     console.log('user disconnected');
   });
 });

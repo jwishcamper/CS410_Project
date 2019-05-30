@@ -23,12 +23,12 @@
   <button id="login">Login</button>
   <button id="create">Create Account</button>
   <input id="usernameBox" autocomplete="off" />
-  <input id="passwordBox" autocomplete="off" />
+  <input id="passwordBox" autocomplete="off" type="password"/>
   <label id="username">Username:</label>
   <label id="password">Password:</label>
   </div>
   <div>
-    <ul id="messages" ></ul>
+    <ul id="messages"></ul>
     <form id="textBoxButtons" action="" >
       <input id="m" autocomplete="off" />
       <button id="sendBut" >Send</button>
@@ -95,7 +95,7 @@
   //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly used by client.
     socket.on('chat message', function(msg){ //receive message
       $('#messages').append($('<li>').text(msg));
-      window.scrollTo(0,document.body.scrollHeight);
+      $('#messages').scrollTop($('#messages')[0].scrollHeight);
     });
     socket.on('loginsuccess',function(){ //login succeeded
         $('#overlay').fadeOut(300, function(){
