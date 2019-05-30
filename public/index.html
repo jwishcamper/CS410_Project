@@ -34,7 +34,7 @@
     <button id="login">Login</button>
     <button id="create">Create Account</button>
     <input id="usernameBox" autocomplete="off" />
-    <input type="password" id="passwordBox" autocomplete="off" />
+    <input id="passwordBox" autocomplete="off" />
     <label id="username">Username:</label>
     <label id="password">Password:</label>
   </div>
@@ -110,18 +110,18 @@
         }
       });
 
-  //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly used by client.
-    socket.on('chat message', function(msg){ //receive message
-      $('#messages').append($('<li>').text(msg));
-      $('#messages').scrollTop($('#messages')[0].scrollHeight);
-    });
-    socket.on('loginsuccess',function(){ //login succeeded
-        $('#overlay').fadeOut(300, function(){
-        	$('#friends').fadeIn(300);
-        	$('#messages').fadeIn(300);
-        	$('#textBoxButtons').fadeIn(300);
-        	$('#m').fadeIn(300);
-        	$('#sendBut').fadeIn(300);
+      //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly used by client.
+      socket.on('chat message', function(msg) { //receive message
+        $('#messages').append($('<li>').text(msg));
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      socket.on('loginsuccess', function() { //login succeeded
+        $('#overlay').fadeOut(300, function() {
+          $('#friends').fadeIn(300);
+          $('#messages').fadeIn(300);
+          $('#textBoxButtons').fadeIn(300);
+          $('#m').fadeIn(300);
+          $('#sendBut').fadeIn(300);
         });
       });
       socket.on('loginfailure', function() { //dialog box that login failed
