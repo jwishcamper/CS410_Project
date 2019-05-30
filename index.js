@@ -60,16 +60,17 @@ socket.on('loginid', function(loginid,pass){
 	    //query login and pass from database, if exists login and change user name
 	  sqlcon.query("select username from userDB.userStorage where username = \""+loginid+"\" and userpass = \""+pass+"\";", function (err, result, fields) {
 		  if(err) console.log(err);
-		  if(result[0] != null) {
-			  io.to(socket.id).emit('loginsuccess');
-			  clients.push(socket.id); 
-			  username[clients.indexOf(socket.id)] = result[0].username; }
-		  else{
+		  if(result[0] != null) 
+			  io.to(socket.id).emit('loginsuccess',result[0].username);
+		  else
 			  io.to(socket.id).emit('loginfailure');
-		  }
 		  });		 
 });
   
+socket.on('loginsucceeded',function(un){
+	clients.push(socket.id); 
+	username[clients.indexOf(socket.id)] = un; 
+});
 //do this when user attempts to create an account
   socket.on('submit', function(loginid,pass,email){
 	    //take user input to create an account in database
