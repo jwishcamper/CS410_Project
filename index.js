@@ -1,5 +1,5 @@
 /*
- *  CLIENT SIDE CODE IN THIS FILE  *
+ *  SERVER SIDE CODE IN THIS FILE  *
  * 
  * 
  * 
@@ -84,10 +84,18 @@ socket.on('loginsucceeded',function(un){
 			  io.to(socket.id).emit('createtaken');
 		  }
 		  else{ //if not, go ahead and insert into database
-			  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",\""+email+"\",curdate(),0,null);", function (err, result, fields) {
+			  if(email!=""){
+				  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",\""+email+"\",curdate(),0,null);", function (err, result, fields) {
 				  if(err) {console.log(err);  }
 				  else{ io.to(socket.id).emit('createsuccess'); }
 				  });	
+			  }
+			  else{
+				  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",null,curdate(),0,null);", function (err, result, fields) {
+					  if(err) {console.log(err);  }
+					  else{ io.to(socket.id).emit('createsuccess'); }
+					  });	
+			  }
 		  }
 		  });
 	  }

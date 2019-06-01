@@ -3,49 +3,61 @@
 $(function() { //wait for document to fully load before running javascript
       var socket = io();
       
-      //toggle off all elements we dont want to see immediately
+      //Cache DOM
+      var $createOverlay = $('#createoverlay');
+      var $backButton = $('#back');
+      var $submitButton = $('#submit');
+      var $usernameBoxCreate = $('#usernameBoxCreate');
+      var $emailBoxCreate = $('#emailBoxCreate');
+      var $passwordBoxCreate = $('#passwordBoxCreate');
+      
+      var $loginOverlay = $('#overlay');
+      var $usernameBoxLogin = $('#usernameBox');
+      var $passwordBoxLogin = $('#passwordBox');
+      var $loginButton = $('#login');
+      var $createButton = $('#create');
 
       //do this when login button clicked
-      $('#login').on('click', function(login) {
+      $loginButton.on('click', function(login) {
         login.preventDefault(); // prevents page reloading
-        socket.emit('loginid', $('#usernameBox').val(), $('#passwordBox').val());
-        $('#usernameBox').val('');
-        $('#passwordBox').val('');
+        socket.emit('loginid', $usernameBoxLogin.val(), $passwordBoxLogin.val());
+        $usernameBoxLogin.val('');
+        $passwordBoxLogin.val('');
         return false;
       });
 
       //do this when create account button clicked
-      $('#create').on('click', function(create) { //bring up create account page
+      $createButton.on('click', function(create) { //bring up create account page
         create.preventDefault(); // prevents page reloading
-        $('#overlay').toggle(300, function() {$('#createoverlay').toggle(300); });
+        $loginOverlay.toggle(300, function() {$createOverlay.toggle(300); });
         return false;
       });
 
       //do this when back button clicked
-      $('#back').on('click', function(back) { //close create account page
+      $backButton.on('click', function(back) { //close create account page
         back.preventDefault(); // prevents page reloading
-        $('#createoverlay').toggle(300, function() {$('#overlay').toggle(300); });
+        $createOverlay.toggle(300, function() {$loginOverlay.toggle(300); });
         return false;
       });
 
       //do this when submit button clicked
-      $('#submit').on('click', function(submit) { //submit account creation
+      $submitButton.on('click', function(submit) { //submit account creation
         submit.preventDefault(); // prevents page reloading
-        socket.emit('submit', $('#usernameBoxCreate').val(), $('#passwordBoxCreate').val(), $('#emailBoxCreate').val());
+        socket.emit('submit', $usernameBoxCreate.val(), $passwordBoxCreate.val(), $emailBoxCreate.val());
         return false;
       });
 
       //if you press enter after typing password, will attempt login
-      $("#passwordBox").keyup(function(event) {
+      $passwordBoxLogin.keyup(function(event) {
         if (event.keyCode === 13) {
-          $("#login").click();
+          $loginButton.click();
         }
       });
 
       //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly used by client.
       socket.on('loginsuccess', function(username) { //login succeeded
     	localStorage.setItem('username', username);
-        $('#overlay').fadeOut(300, function() { window.location.replace("chatPage.html"); });
+        $loginOverlay.fadeOut(300, function() { window.location.replace("chatPage.html"); });
       });
       socket.on('loginfailure', function() { //dialog box that login failed
         alert("Invalid Login Info, please try again");
@@ -58,6 +70,6 @@ $(function() { //wait for document to fully load before running javascript
       });
       socket.on('createsuccess', function() { //dialog box that create succeeded
         alert("Account Created, please login");
-        $('#createoverlay').toggle(300, function() { $('#overlay').toggle(300); });
+        $createOverlay.toggle(300, function() { $loginOverlay.toggle(300); });
       });
 });
