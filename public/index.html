@@ -14,33 +14,62 @@
 
   </div>
   <div id="createoverlay" class="container">
-    <div class="form-group">
-      <label for="usernameBoxCreate" id="username">Username:</label>
-      <input type="text" class="form-control" id="usernameBoxCreate" autocomplete="off" />
+    <div class="d-flex justify-content-center h-100">
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Sign Up</h3>
+        </div>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="emailBoxCreate">Email</span>
+          </div>
+          <input type="email" class="form-control" id="emailBoxCreate" autocomplete="off" placeholder="Enter email" />
+        </div>
+        <div class="input group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="usernameBoxCreate">Username</span>
+          </div>
+          <input type="text" class="form-control" id="usernameBoxCreate" autocomplete="off" placeholder="Enter username" />
+        </div>
+        <div class="input group form-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="passwordBoxCreate">Password</span>
+          </div>
+          <input type="password" class="form-control" id="passwordBoxCreate" autocomplete="off" placeholder="Enter password" />
+        </div>
+        <div class="form group text-center">
+          <button id="back" class="btn btn-secondary">Back</button>
+          <button id="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="passwordBoxCreate" id="passwordCreate">Password:</label>
-      <input type="password" class="form-control" id="passwordBoxCreate" autocomplete="off" />
-    </div>
-    <div class="form-group">
-      <label for="emailBoxCreate" id="email">Email:</label>
-      <input type="email" class="form-control" id="emailBoxCreate" autocomplete="off" />
-    </div>
-    <button id="submit">Submit</button>
-    <button id="back">Back</button>
   </div>
 
   <div id="overlay" class="container">
-    <div class="form-group">
-      <label for="usernameBox" id="username">Username:</label>
-      <input type="text" class="form-control" id="usernameBox" autocomplete="off" />
+    <div class="d-flex justify-content-center h-100">
+      <div class="card">
+        <div class="card-header">
+          <h3>Log In</h3>
+        </div>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span for="usernameBox" id="username">Username</span>
+          </div>
+          <input type="text" class="form-control" id="usernameBox" autocomplete="off" placeholder="Enter username" />
+        </div>
+        <div class="input-group form-group">
+          <div class="input-group-prepend">
+            <span for="passwordBox" id="password">Password:</span>
+          </div>
+          <input type="password" class="form-control" id="passwordBox" autocomplete="off" placeholder="Enter password" />
+        </div>
+        <div class="form-group text-center">
+          <button id="create" class="btn btn-secondary">Create Account</button>
+          <button id="login" class="btn btn-primary">Login</button>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="passwordBox" id="password">Password:</label>
-      <input type="password" class="form-control" id="passwordBox" autocomplete="off" type="password" />
-    </div>
-    <button id="login">Login</button>
-    <button id="create">Create Account</button>
   </div>
   <div>
     <ul id="messages" class="col-sm-8"></ul>

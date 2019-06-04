@@ -54,7 +54,14 @@ form button {
 #messages li:nth-child(odd) {
   background: #eee;
 }
-
+.card{
+height: 370px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.05) !important;
+}
+/*
 #overlay {
   position: fixed;
   display: block;
@@ -183,7 +190,7 @@ form button {
   height: 5%;
   top: 46%;
   left: 29%
-}
+}*/
 
 #friends {
   position: fixed;
