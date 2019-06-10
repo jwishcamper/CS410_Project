@@ -152,9 +152,12 @@ socket.on('loginsucceeded',function(un){
   
 //do this when user disconnects
   socket.on('disconnect', function(){
-	clients.splice(clients.indexOf(socket.id), 1);
-	username.splice(clients.indexOf(socket.id), 1);
+	  if(clients.includes(socket.id)){
+		clients.splice(clients.indexOf(socket.id), 1);
+		username.splice(clients.indexOf(socket.id), 1);
+	  }
     console.log('user disconnected');
+    console.log(clients);
   });
 });
 
