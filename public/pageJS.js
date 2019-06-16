@@ -34,6 +34,12 @@ $(function() { //wait for document to fully load before running javascript
       socket.on('friendAdded', function() {
     	  populateFriends();
     	  alert("Friend added!"); 
+    	  socket.emit('updateList');
+      });
+      
+      socket.on('reqPopulate',function(otherUser){
+    	  alert(otherUser+" added you as a friend!");
+    	 populateFriends(); 
       });
       
       //called to populate friends list
@@ -80,5 +86,6 @@ $(function() { //wait for document to fully load before running javascript
     //Helper function to add friends
       function addFriend(friend){
     	  socket.emit('addFriend', friend, name);
+    	  socket.emit('updateAdded',friend, name);
       }
     });
