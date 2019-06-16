@@ -9,6 +9,7 @@ $(function() { //wait for document to fully load before running javascript
       var $messageBox = $('#m');
       var $messageWindow = $('#messages');
       var $friendsPane = $('#friends');
+      var $addFriendButton = $('#addButton');
       
       socket.emit('loginsucceeded', localStorage.getItem('username'));
       var name = localStorage.getItem('username');
@@ -68,4 +69,16 @@ $(function() { //wait for document to fully load before running javascript
     	  socket.emit('populateFriends');
       }
       
+    //Do this when add friend button is clicked
+      $addFriendButton.on('click', function(e){
+    	 e.preventDefault();  //Prevents page reloading
+    	 var friend = prompt("Enter username", "");
+    	 if(friend != null){
+    		 addFriend(friend);
+    	 }
+      });
+    //Helper function to add friends
+      function addFriend(friend){
+    	  socket.emit('addFriend', friend, name);
+      }
     });
