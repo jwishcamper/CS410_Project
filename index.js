@@ -154,7 +154,13 @@ socket.on('loginsucceeded',function(un){
 			  callback(result[0].userID);}
 	  });
   }
-  
+   //way to update friends list from client
+  socket.on('updateList',function(){
+	  io.emit('populateOnline',username);
+  });
+  socket.on('updateAdded',function(usernameToUpdate,otherName){
+	  io.to(clients[username.indexOf(usernameToUpdate)]).emit('reqPopulate',otherName);
+  });
 //do this when user disconnects
   socket.on('disconnect', function(){
 	  if(clients.includes(socket.id)){
