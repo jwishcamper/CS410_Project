@@ -8,10 +8,12 @@ $(function() { //wait for document to fully load before running javascript
       var $sendButton = $('#sendBut');
       var $messageBox = $('#m');
       var $messageWindow = $('#messages');
+      var $friendsPane = $('#friends');
       
       socket.emit('loginsucceeded', localStorage.getItem('username'));
+      var name = localStorage.getItem('username');
       populateFriends(); //initial populate
-      
+            
       //do this when send message button clicked
       $sendButton.on('click', function(e) { //send message
         e.preventDefault(); // prevents page reloading
@@ -36,6 +38,28 @@ $(function() { //wait for document to fully load before running javascript
       //called to populate friends list
       socket.on('friendsList',function(name){
     	  friends.push(name);
+      });
+      //called by server when any user logs in or disconnects, passes array of usernames "onlineUsers"
+      socket.on('populateOnline',function(onlineUsers){
+    	  //for each user in list given, make an html element to display online users
+    	  $(".friendObject").remove();
+    	  var friendsOnline =[]; //used to store online friends so they are not displayed in offline section
+    	  //populate online friends
+    	  $("<div class='friendObject'><p>Online Friends:</p></div>").appendTo($friendsPane);
+    	  for(var i =0;i<onlineUsers.length;i++){
+    		  //create element for online users
+    		  if(friends.includes(onlineUsers[i])||onlineUsers[i]==name){
+    			  $("<div class='friendObject'><p>"+onlineUsers[i]+"</p></div>").appendTo($friendsPane);
+    			  friendsOnline.push(onlineUsers[i]); 
+    		  }
+    	  }
+    	  //populate offline friends
+    	  $("<div class='friendObject'><p>Offline Friends:</p></div>").appendTo($friendsPane);
+    	  for (var i =0;i<friends.length;i++){
+    		  if(!friendsOnline.includes(friends[i])){
+    			  $("<div class='friendObject'><p>"+friends[i]+"</p></div>").appendTo($friendsPane);
+    		  }
+    	  }
       });
       
       //helper function to populate user's friends list

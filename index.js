@@ -71,6 +71,10 @@ socket.on('loginid', function(loginid,pass){
 socket.on('loginsucceeded',function(un){
 	clients.push(socket.id); 
 	username[clients.indexOf(socket.id)] = un; 
+	setTimeout(function() {
+		io.emit('populateOnline',username);
+	}, 200);
+	
 });
 
 //do this when user attempts to create an account
@@ -153,11 +157,11 @@ socket.on('loginsucceeded',function(un){
 //do this when user disconnects
   socket.on('disconnect', function(){
 	  if(clients.includes(socket.id)){
-		clients.splice(clients.indexOf(socket.id), 1);
 		username.splice(clients.indexOf(socket.id), 1);
+		clients.splice(clients.indexOf(socket.id), 1);
+		io.emit('populateOnline',username);
 	  }
     console.log('user disconnected');
-    console.log(clients);
   });
 });
 
