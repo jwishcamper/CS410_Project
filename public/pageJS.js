@@ -36,6 +36,7 @@ $(function() { //wait for document to fully load before running javascript
       //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly called by client.
       socket.on('chat message', function(msg) { //receive message
     	if( msg.startsWith(name+":") ){
+    		msg = msg.replace(name + ':', '');
     		$messageWindow.append($("<li class='self'>").text(msg));
     	}
     	else{
