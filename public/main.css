@@ -60,6 +60,7 @@ form button {
   border-radius: 3px;
   color: #646464;
   width: auto;
+  max-width: 60%;
   clear: both;
 }
 
