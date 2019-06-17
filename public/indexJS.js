@@ -2,7 +2,7 @@
 
 $(function() { //wait for document to fully load before running javascript
       var socket = io();
-      
+
       //Cache DOM
       var $createOverlay = $('#createoverlay');
       var $backButton = $('#back');
@@ -10,7 +10,7 @@ $(function() { //wait for document to fully load before running javascript
       var $usernameBoxCreate = $('#usernameBoxCreate');
       var $emailBoxCreate = $('#emailBoxCreate');
       var $passwordBoxCreate = $('#passwordBoxCreate');
-      
+
       var $loginOverlay = $('#overlay');
       var $usernameBoxLogin = $('#usernameBox');
       var $passwordBoxLogin = $('#passwordBox');

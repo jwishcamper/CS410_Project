@@ -1,38 +1,38 @@
-
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+html {
+  height: 100%
+}
+body {
+  height: 100%;
 }
 
-/*body {
-  font: 13px Helvetica, Arial;
-}*/
-
 form {
-  background: #000;
-  padding: 3px;
+  /* background: #000; */
+  /* padding: 3px; */
   position: fixed;
   bottom: 0;
-  width: 67%;
-  left: 33%;
+  /* width: 60%; */
+  /* left: 33%; */
 }
 
 form input {
-  position: fixed;
-  border: solid;
-  padding: 10px;
-  width: 58%;
-  margin-right: .5%;
+  /* position: fixed; */
+  /* border: solid; */
+  /* padding: 10px; */
+  width: 60%;
+  /* margin-right: .5%; */
 }
 
 form button {
-  float: right;
-  width: 12.5%;
-  background: rgb(130, 224, 255);
-  right: 0;
-  border: solid;
-  padding: 10px;
+  /* float: right; */
+  /* width: 12.5%; */
+  /* background: white; */
+  /* right: 0; */
+  /* border: solid; */
+  /* padding: 10px;*/
 }
 
 #messages {
@@ -40,10 +40,9 @@ form button {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  left: 33%;
-  width: 66%;
-  height:100%;
-  padding-bottom: 4%;
+  width: 60%;
+  height: 100%;
+
   overflow-y: auto;
 }
 
@@ -54,13 +53,20 @@ form button {
 #messages li:nth-child(odd) {
   background: #eee;
 }
-.card{
-height: 370px;
-margin-top: auto;
-margin-bottom: auto;
-width: 400px;
-background-color: rgba(0,0,0,0.05) !important;
+
+.container{
+  height: 100%;
+  width: 100%;
 }
+
+.card {
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
 /*
 #overlay {
   position: fixed;
@@ -74,20 +80,13 @@ background-color: rgba(0,0,0,0.05) !important;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
-
+*/
 #createoverlay {
-  position: fixed;
+  position: absolute;
   display: none;
-  width: 60%;
-  height: 60%;
-  top: 20%;
-  left: 20%;
-  right: 20%;
-  bottom: 20%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
 }
 
+/*
 #login {
   position: fixed;
   width: 10%;
@@ -143,7 +142,7 @@ background-color: rgba(0,0,0,0.05) !important;
   top: 60%;
   left: 35%
 }
-
+/*
 #back {
   position: fixed;
   width: 10%;
@@ -191,12 +190,23 @@ background-color: rgba(0,0,0,0.05) !important;
   top: 46%;
   left: 29%
 }*/
-
 #friends {
-  position: fixed;
-  display: block;
-  width: 33%;
+  float: left;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #ced4da;
+
   z-index: 2;
+}
+#msg {
+  height: 100%;
+  float: right;
+}
+#send{
+  width: 100%;
+}
+#textBoxButtons {
+  display: flex;
+  /* padding-top: 100%; */
+  width: 63%;
 }

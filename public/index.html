@@ -12,32 +12,39 @@
 <body>
   <div id="createoverlay" class="container">
     <div class="d-flex justify-content-center h-100">
-
       <div class="card">
         <div class="card-header">
           <h3>Sign Up</h3>
         </div>
-        <div class="input-group form-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" for="emailBoxCreate">Email</span>
-          </div>
-          <input type="email" class="form-control" id="emailBoxCreate" autocomplete="off" placeholder="Enter email" />
-        </div>
-        <div class="input group form-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" for="usernameBoxCreate">Username</span>
-          </div>
-          <input type="text" class="form-control" id="usernameBoxCreate" autocomplete="off" placeholder="Enter username" />
-        </div>
-        <div class="input group form-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" for="passwordBoxCreate">Password</span>
-          </div>
-          <input type="password" class="form-control" id="passwordBoxCreate" autocomplete="off" placeholder="Enter password" />
-        </div>
-        <div class="form group text-center">
-          <button id="back" class="btn btn-secondary">Back</button>
-          <button id="submit" class="btn btn-primary">Submit</button>
+        <div class="card-body">
+          <form>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" for="emailBoxCreate">Email</span>
+              </div>
+              <input type="email" class="form-control" id="emailBoxCreate" autocomplete="off" placeholder="Enter email">
+
+            </div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" for="usernameBoxCreate">Username</span>
+              </div>
+              <input type="text" class="form-control" id="usernameBoxCreate" autocomplete="off" placeholder="Enter username">
+
+            </div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" for="passwordBoxCreate">Password</span>
+              </div>
+              <input type="password" class="form-control" id="passwordBoxCreate" autocomplete="off" placeholder="Enter password">
+
+            </div>
+
+            <div class="form group text-center">
+              <button id="back" class="btn btn-secondary">Back</button>
+              <button id="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -49,21 +56,23 @@
         <div class="card-header">
           <h3>Log In</h3>
         </div>
-        <div class="input-group form-group">
-          <div class="input-group-prepend">
-            <span for="usernameBox" id="username">Username</span>
+        <div class="card-body">
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" for="usernameBox" id="username">Username</span>
+            </div>
+            <input type="text" class="form-control" id="usernameBox" autocomplete="off" placeholder="Enter username" />
           </div>
-          <input type="text" class="form-control" id="usernameBox" autocomplete="off" placeholder="Enter username" />
-        </div>
-        <div class="input-group form-group">
-          <div class="input-group-prepend">
-            <span for="passwordBox" id="password">Password:</span>
+          <div class="input-group form-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" for="passwordBox" id="password">Password</span>
+            </div>
+            <input type="password" class="form-control" id="passwordBox" autocomplete="off" placeholder="Enter password" />
           </div>
-          <input type="password" class="form-control" id="passwordBox" autocomplete="off" placeholder="Enter password" />
-        </div>
-        <div class="form-group text-center">
-          <button id="create" class="btn btn-secondary">Create Account</button>
-          <button id="login" class="btn btn-primary">Login</button>
+          <div class="form-group text-center">
+            <button id="create" class="btn btn-secondary">Create Account</button>
+            <button id="login" class="btn btn-primary">Login</button>
+          </div>
         </div>
       </div>
     </div>
