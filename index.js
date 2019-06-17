@@ -52,7 +52,7 @@ io.on('connection', function(socket){
   //do this when user sends a message
   //when implementing private chats, io.emit will change to io.to(socket.id [of appropriate socket] ).emit
   socket.on('chat message', function(msg){
-    io.emit('chat message',username[clients.indexOf(socket.id)]+": "+ msg);
+    io.emit('chat message', username[clients.indexOf(socket.id)]+": "+ msg);
   });
   
 //do this when user attempts to login
@@ -106,6 +106,7 @@ socket.on('loginsucceeded',function(un){
   
 //add friend, call this method when friend request accepted
 //try to handle duplicate requests before this is called - ie, dont allow users to add someone already a friend
+  
   socket.on('addFriend', function(user1,user2){
 	  var userid1,userid2;
 	  getUserID(user1, function(result){

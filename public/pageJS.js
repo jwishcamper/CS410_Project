@@ -1,20 +1,21 @@
 $(function() { //wait for document to fully load before running javascript
       var socket = io();
-      
+
       //contains a list of userID's of friends, updated every time populateFriends(); is called
       var friends = [];
-      
+
       //Cache DOM
       var $sendButton = $('#sendBut');
       var $messageBox = $('#m');
       var $messageWindow = $('#messages');
       var $friendsPane = $('#friends');
       var $addFriendButton = $('#addButton');
-      
+
       socket.emit('loginsucceeded', localStorage.getItem('username'));
       var name = localStorage.getItem('username');
       populateFriends(); //initial populate
-            
+      var name = localStorage.getItem('username');
+
       //do this when send message button clicked
       $sendButton.on('click', function(e) { //send message
         e.preventDefault(); // prevents page reloading
@@ -23,10 +24,19 @@ $(function() { //wait for document to fully load before running javascript
         return false;
       });
 
+      //Do this when add friend button is clicked
+      $addFriendButton.on('click', function(e){
+    	 e.preventDefault();  //Prevents page reloading
+    	 var friend = prompt("Enter username", "");
+    	 if(friend != null){
+    		 addFriend(friend);
+    	 }
+      });
 
       //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly called by client.
       socket.on('chat message', function(msg) { //receive message
     	if( msg.startsWith(name+":") ){
+    		msg = msg.replace(name + ':', '');
     		$messageWindow.append($("<li class='self'>").text(msg));
     	}
     	else{
@@ -34,19 +44,19 @@ $(function() { //wait for document to fully load before running javascript
     	}
         $messageWindow.scrollTop($messageWindow[0].scrollHeight);
       });
-      
+
       //called when friend added successfully
       socket.on('friendAdded', function() {
     	  populateFriends();
-    	  alert("Friend added!"); 
+    	  alert("Friend added!");
     	  socket.emit('updateList');
       });
-      
+
       socket.on('reqPopulate',function(otherUser){
     	 alert(otherUser+" added you as a friend!");
-    	 populateFriends(); 
+    	 populateFriends();
       });
-      
+
       //called to populate friends list
       socket.on('friendsList',function(name){
     	  friends.push(name);
@@ -62,7 +72,7 @@ $(function() { //wait for document to fully load before running javascript
     		  //create element for online users
     		  if(friends.includes(onlineUsers[i])||onlineUsers[i]==name){
     			  $("<div class='friendObject'><p>"+onlineUsers[i]+"</p></div>").appendTo($friendsPane);
-    			  friendsOnline.push(onlineUsers[i]); 
+    			  friendsOnline.push(onlineUsers[i]);
     		  }
     	  }
     	  //populate offline friends
@@ -73,13 +83,13 @@ $(function() { //wait for document to fully load before running javascript
     		  }
     	  }
       });
-      
+
       //helper function to populate user's friends list
       function populateFriends(){
     	  friends.length=0;
     	  socket.emit('populateFriends');
       }
-      
+
     //Do this when add friend button is clicked
       $addFriendButton.on('click', function(e){
     	 e.preventDefault();  //Prevents page reloading
