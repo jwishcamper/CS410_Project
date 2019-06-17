@@ -29,6 +29,9 @@ $(function() { //wait for document to fully load before running javascript
       //do this when create account button clicked
       $createButton.on('click', function(create) { //bring up create account page
         create.preventDefault(); // prevents page reloading
+        $usernameBoxCreate.val('');
+        $passwordBoxCreate.val('');
+        $emailBoxCreate.val('');
         $loginOverlay.toggle(300, function() {$createOverlay.toggle(300); });
         return false;
       });
@@ -43,7 +46,13 @@ $(function() { //wait for document to fully load before running javascript
       //do this when submit button clicked
       $submitButton.on('click', function(submit) { //submit account creation
         submit.preventDefault(); // prevents page reloading
-        socket.emit('submit', $usernameBoxCreate.val(), $passwordBoxCreate.val(), $emailBoxCreate.val());
+        var emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if($usernameBoxCreate.val() != "" && $passwordBoxCreate.val() != "" && ( emailRegex.test(String($emailBoxCreate.val()).toLowerCase()) || $emailBoxCreate.val()=="")){
+        	socket.emit('submit', $usernameBoxCreate.val(), $passwordBoxCreate.val(), $emailBoxCreate.val());
+        }
+        else{
+        	alert("Please enter a valid username, password, and (optional) email.");
+        }
         return false;
       });
 
