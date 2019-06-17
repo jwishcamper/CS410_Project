@@ -46,15 +46,24 @@ form button {
 }
 
 .self {
-  text-align: right;
-  background-color: #007bff;
+  background: #05728f !important;
+  color: #fff !important;
+  float: right !important;
 }
 
 #messages li {
+  float: left;
   padding: 5px 10px;
-  background: rgba(0, 0, 0, 0.1);
-  margin-top:15px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  background: #ebebeb;
+  border-radius: 3px;
+  color: #646464;
+  width: auto;
+  clear: both;
 }
+
+
 
 .container{
   height: 100%;
