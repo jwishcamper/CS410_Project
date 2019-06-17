@@ -26,7 +26,12 @@ $(function() { //wait for document to fully load before running javascript
 
       //these socket.on's are called by client for dialog boxes,chat messages, etc. Not directly called by client.
       socket.on('chat message', function(msg) { //receive message
-        $messageWindow.append($('<li>').text(msg));
+    	if( msg.startsWith(name+":") ){
+    		$messageWindow.append($("<li class='self'>").text(msg));
+    	}
+    	else{
+    		$messageWindow.append($('<li>').text(msg));
+    	}
         $messageWindow.scrollTop($messageWindow[0].scrollHeight);
       });
       
@@ -38,7 +43,7 @@ $(function() { //wait for document to fully load before running javascript
       });
       
       socket.on('reqPopulate',function(otherUser){
-    	  alert(otherUser+" added you as a friend!");
+    	 alert(otherUser+" added you as a friend!");
     	 populateFriends(); 
       });
       

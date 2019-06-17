@@ -80,31 +80,28 @@ socket.on('loginsucceeded',function(un){
 //do this when user attempts to create an account
   socket.on('submit', function(loginid,pass,email){
 	    //take user input to create an account in database
-	  if(loginid=="" || pass ==""){//if there's nothing in user or pass fields, stop here
-		  io.to(socket.id).emit('createfailure');
+  
+	  sqlcon.query("select username from userDB.userStorage where username = \""+loginid+"\";", function (err, result, fields) {
+	  if(err) console.log(err);
+	  if(result[0] != null) {
+		  io.to(socket.id).emit('createtaken'); //if this query has something, the username is taken
 	  }
-	  else{ 
-		  sqlcon.query("select username from userDB.userStorage where username = \""+loginid+"\";", function (err, result, fields) {
-		  if(err) console.log(err);
-		  if(result[0] != null) {
-			  io.to(socket.id).emit('createtaken'); //if this query has something, the username is taken
+	  else{ //if not, go ahead and insert into database
+		  if(email!=""){//if user inputted an email
+			  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",\""+email+"\",curdate(),0,null);", function (err, result, fields) {
+			  if(err) {console.log(err);  }
+			  else{ io.to(socket.id).emit('createsuccess'); }
+			  });	
 		  }
-		  else{ //if not, go ahead and insert into database
-			  if(email!=""){//if user inputted an email
-				  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",\""+email+"\",curdate(),0,null);", function (err, result, fields) {
+		  else{//if no email, go ahead and insert null for email field
+			  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",null,curdate(),0,null);", function (err, result, fields) {
 				  if(err) {console.log(err);  }
 				  else{ io.to(socket.id).emit('createsuccess'); }
 				  });	
-			  }
-			  else{//if no email, go ahead and insert null for email field
-				  sqlcon.query("insert into userDB.userStorage values(default,\""+loginid+"\",\""+pass+"\",null,curdate(),0,null);", function (err, result, fields) {
-					  if(err) {console.log(err);  }
-					  else{ io.to(socket.id).emit('createsuccess'); }
-					  });	
-			  }
 		  }
-		  });
 	  }
+	  });
+  
   });
   
 //add friend, call this method when friend request accepted
@@ -155,7 +152,9 @@ socket.on('loginsucceeded',function(un){
   }
    //way to update friends list from client
   socket.on('updateList',function(){
-	  io.emit('populateOnline',username);
+	  setTimeout(function() {
+			io.emit('populateOnline',username);
+		}, 200);
   });
   socket.on('updateAdded',function(usernameToUpdate,otherName){
 	  io.to(clients[username.indexOf(usernameToUpdate)]).emit('reqPopulate',otherName);
